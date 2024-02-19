@@ -2,10 +2,9 @@ import React, { RefObject } from "react";
 import { Link } from "react-router-dom";
 import SimplePeer from "simple-peer";
 import { io } from "socket.io-client";
-import * as ffmpeg from 'fluent-ffmpeg';
 
 class Viewer extends React.Component {
-  myVideo: RefObject<HTMLVideoElement> = React.createRef();
+  private myVideo: RefObject<HTMLVideoElement> = React.createRef();
 
   startViews(): void {
     const socket = io("http://localhost:3001");
@@ -33,12 +32,15 @@ class Viewer extends React.Component {
     return (
       <div>
         <header>Просмотр стрима</header>
+
         <Link to="/">
           <button>На Главную</button>
         </Link>
+
         <button className="input_offer" onClick={() => this.startViews()}>
           Посмотреть стрим
         </button>
+
         <div style={{ marginTop: 50 }}>
           <video
             ref={this.myVideo}
